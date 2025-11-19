@@ -37,16 +37,19 @@ document.querySelector("#skip").addEventListener("click", function() {
 	console.log("New location", video.currentTime);
 });
 
-document.querySelector("#mute").addEventListener("click", function() {
-	if (video.muted == false){
-		video.muted = true;
-		document.querySelector("#mute").innerHTML = "Unmuted";
-	}
-	else {
-		video.muted = false;
-		document.querySelector("#mute").innerHTML = "Muted";
-	}
+document.querySelector("#mute").addEventListener("click", function () {
+    if (!video.muted) {
+        video.muted = true;
+        this.innerText = "Unmute";
+        document.querySelector("#volume").innerText = "0%";
+    } else {
+        video.muted = false;
+        this.innerText = "Mute";
+        document.querySelector("#volume").innerText =
+            Math.round(video.volume * 100) + "%"; 
+    }
 });
+
 
 document.querySelector("#slider").addEventListener("input", function () {
     video.volume = this.value / 100;
